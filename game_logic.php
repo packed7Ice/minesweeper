@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 
-// ---------- ゲーム初期化 ----------
+// ---------- ゲーム開始時の盤面を構築 ----------
 function initGame($rows, $cols, $mines)
 {
-    // 地雷数が多すぎる場合のガード
+    // 地雷が多すぎる場合は最後の1マスは必ず安全にする
     $maxMines = $rows * $cols - 1;
     if ($mines > $maxMines) {
         $mines = $maxMines;
@@ -22,7 +22,7 @@ function initGame($rows, $cols, $mines)
         }
     }
 
-    // 地雷をランダム配置
+    // 地雷をランダムに設置し、重複設置は避ける
     $placed = 0;
     while ($placed < $mines) {
         $r = rand(0, $rows - 1);
@@ -33,7 +33,7 @@ function initGame($rows, $cols, $mines)
         }
     }
 
-    // 周囲地雷数を計算
+    // 各マスについて周囲8方向の地雷数を事前計算
     for ($r = 0; $r < $rows; $r++) {
         for ($c = 0; $c < $cols; $c++) {
             if ($board[$r][$c]['mine']) {
@@ -64,7 +64,7 @@ function initGame($rows, $cols, $mines)
     $_SESSION['win'] = false;
 }
 
-// ---------- 再帰的にマスを開く ----------
+// ---------- 再帰的にマスを開き、0なら周囲も広げる ----------
 function openCell($r, $c)
 {
     $rows = $_SESSION['rows'];
@@ -79,7 +79,7 @@ function openCell($r, $c)
 
     $cell['open'] = true;
 
-    // 周囲ゼロなら周囲も開く
+    // 周囲ゼロなら再帰的に近隣を開放する
     if (!$cell['mine'] && $cell['adjacent'] === 0) {
         for ($dr = -1; $dr <= 1; $dr++) {
             for ($dc = -1; $dc <= 1; $dc++) {
@@ -90,7 +90,7 @@ function openCell($r, $c)
     }
 }
 
-// ---------- 勝利判定 ----------
+// ---------- 全ての安全マスを開けたかを判定 ----------
 function checkWin()
 {
     $board = $_SESSION['board'];

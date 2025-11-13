@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/controller.php';
 
-// 画面部分（.body-layout）の HTML をキャプチャする
+// 画面本体（.body-layout）を一度バッファに貯めてAJAX/通常描画で使い回す
 ob_start();
 ?>
 <div class="body-layout">
@@ -16,7 +16,7 @@ ob_start();
 <?php
 $bodyLayoutHtml = ob_get_clean();
 
-// Ajax（JSのfetch）からのリクエストなら、.body-layout だけ返す
+// fetch経由の差分更新リクエストではbody-layoutだけ返す
 $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
           $_SERVER['HTTP_X_REQUESTED_WITH'] === 'fetch';
 
@@ -40,7 +40,7 @@ if ($isAjax) {
     <div class="card">
         <?php include __DIR__ . '/views/header.php'; ?>
         <?php
-        // 通常表示時は .body-layout をここに出力
+        // 通常描画ではここでレイアウト全体を出力する
         echo $bodyLayoutHtml;
         ?>
     </div>

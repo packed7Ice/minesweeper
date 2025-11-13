@@ -1,8 +1,9 @@
 // app.js
+// 盤面UI操作とAJAX通信をまとめて制御するクライアントスクリプト
 
 window.addEventListener('load', () => {
     let clickMode = 'open'; // 'open' or 'flag'
-    const endpoint = window.location.href; // index.php へのPOSTに使う
+    const endpoint = window.location.href; // index.phpへのPOST先（現在のURLをそのまま利用）
 
     // -----------------------------
     // セルサイズ自動調整（レスポンシブ）
@@ -24,6 +25,7 @@ window.addEventListener('load', () => {
         const sizeFromWidth = maxBoardWidth / cols;
         const sizeFromHeight = availableHeight / rows;
 
+        // 横幅と縦幅の制約を両立できる最小値を採用し、極端な値は丸める
         let size = Math.floor(Math.min(sizeFromWidth, sizeFromHeight, 48));
         size = Math.max(16, size);
 
@@ -32,6 +34,7 @@ window.addEventListener('load', () => {
     }
 
     let resizeTimer = null;
+    // 連続リサイズ時に計算を絞るため簡易デバウンスを入れる
     window.addEventListener('resize', () => {
         if (resizeTimer) clearTimeout(resizeTimer);
         resizeTimer = setTimeout(recalcCellSize, 80);
@@ -94,6 +97,7 @@ window.addEventListener('load', () => {
             if (!resp.ok) {
                 throw new Error('HTTP ' + resp.status);
             }
+            // 差分HTML（.body-layout）だけを受け取り、DOM差し替えで高速化
             const html = await resp.text();
             replaceBodyLayoutFromHtml(html);
         } catch (e) {
