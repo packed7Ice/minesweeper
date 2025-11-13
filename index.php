@@ -7,6 +7,8 @@ require_once __DIR__ . '/controller.php';
     <meta charset="UTF-8">
     <title>PHP Minesweeper</title>
     <link rel="stylesheet" href="style.css">
+        <!-- ★ 追加：外部JSを読み込む -->
+    <script src="app.js" defer></script>
 </head>
 <body>
 <div class="app">

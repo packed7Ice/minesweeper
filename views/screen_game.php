@@ -16,11 +16,14 @@ foreach ($board as $row) {
 $remainingMines = max(0, $mines - $flags);
 ?>
 <div class="body-layout">
+    <!-- 左側：説明・ボタン・ステータス -->
     <div>
         <div class="section-title">Play</div>
         <p class="section-desc">
-            上段のボタンで<strong>「マスを開く」</strong>、下段のボタンで<strong>「旗を立てる / 外す」</strong>ができます。<br>
-            すべての安全なマスを開けるとクリアです。
+            左クリックでマスを開きます。<br>
+            右クリックでフラグの設置・解除ができます。<br>
+            タッチデバイスなど右クリックしづらい環境では、下の「操作モード切替」ボタンで
+            左クリックの動作を「開く / 旗」に切り替えられます。
         </p>
         <div class="button-row">
             <form method="post">
@@ -48,8 +51,35 @@ $remainingMines = max(0, $mines - $flags);
                 残り地雷数（目安）：<span class="info-highlight"><?php echo $remainingMines; ?></span>
             </div>
         <?php endif; ?>
+
+        <!-- クリックモード切り替えボタン -->
+        <div style="margin-top: 16px;">
+            <button id="clickModeToggle" class="secondary-button" type="button">
+                操作モード: 開く（左クリック） / 右クリック: 旗
+            </button>
+        </div>
+
+        <!-- ズーム（セルサイズ）調整 -->
+        <div class="panel" style="margin-top: 18px;">
+            <div class="panel-header">
+                <div class="panel-title">Zoom</div>
+                <div class="pill pill-outline" id="zoomValueLabel">セルサイズ: 30px</div>
+            </div>
+            <input
+                type="range"
+                id="cellSizeSlider"
+                class="zoom-slider"
+                min="18"
+                max="48"
+                value="30"
+            >
+            <p class="info-text" style="margin-top: 8px;">
+                セルサイズを変更すると、小さい画面でも盤面がカードの枠内に収まりやすくなります。
+            </p>
+        </div>
     </div>
 
+    <!-- 右側：盤面 -->
     <div>
         <div class="panel">
             <div class="panel-header">
@@ -58,6 +88,13 @@ $remainingMines = max(0, $mines - $flags);
                     <?php echo $rows . ' × ' . $cols . ' / 💣 ' . $mines; ?>
                 </div>
             </div>
+
+            <!-- セル送信用の隠しフォーム（JSから操作） -->
+            <form id="cellActionForm" method="post" style="display:none;">
+                <input type="hidden" name="row" id="cellRow">
+                <input type="hidden" name="col" id="cellCol">
+                <input type="hidden" name="action" id="cellAction">
+            </form>
 
             <div class="board-wrapper">
                 <table class="board">
@@ -84,16 +121,14 @@ $remainingMines = max(0, $mines - $flags);
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     <?php else: ?>
-                                        <form method="post" class="cell-form">
-                                            <input type="hidden" name="row" value="<?php echo $r; ?>">
-                                            <input type="hidden" name="col" value="<?php echo $c; ?>">
-                                            <button type="submit" name="action" value="open" class="cell-btn">
-                                                Open
-                                            </button>
-                                            <button type="submit" name="action" value="flag" class="cell-btn">
-                                                <?php echo $cell['flag'] ? '⚑ Flag' : 'Flag'; ?>
-                                            </button>
-                                        </form>
+                                        <button
+                                            type="button"
+                                            class="cell-interactive"
+                                            data-row="<?php echo $r; ?>"
+                                            data-col="<?php echo $c; ?>"
+                                        >
+                                            <?php echo $cell['flag'] ? '⚑' : ''; ?>
+                                        </button>
                                     <?php endif; ?>
                                 </td>
                             <?php endfor; ?>

@@ -8,6 +8,7 @@
     --border: #1f2937;
     --text-main: #e5e7eb;
     --text-muted: #9ca3af;
+    --cell-size: 30px;   /* ★ 追加：セルの基本サイズ */
 }
 
 * {
@@ -311,11 +312,12 @@ table.board {
 }
 
 .board td {
-    width: 30px;
-    height: 30px;
+    width: var(--cell-size);
+    height: var(--cell-size);
     border: 1px solid rgba(55,65,81,0.9);
     padding: 0;
 }
+
 
 .cell-form {
     width: 100%;
@@ -397,4 +399,26 @@ table.board {
 
 .status-neutral {
     color: var(--text-muted);
+}
+.zoom-slider {
+    width: 100%;
+    accent-color: #38bdf8; /* 対応ブラウザならつまみの色だけ変わる */
+}
+.cell-interactive {
+    width: 100%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    background: rgba(15,23,42,0.95);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: background 0.12s, transform 0.08s;
+}
+
+.cell-interactive:hover {
+    background: rgba(30,64,175,0.95);
+    transform: translateY(-0.5px);
 }
