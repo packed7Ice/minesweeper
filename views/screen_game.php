@@ -22,8 +22,7 @@ $remainingMines = max(0, $mines - $flags);
         <p class="section-desc">
             左クリックでマスを開きます。<br>
             右クリックでフラグの設置・解除ができます。<br>
-            タッチデバイスなど右クリックしづらい環境では、下の「操作モード切替」ボタンで
-            左クリックの動作を「開く / 旗」に切り替えられます。
+            タッチデバイスなどクリックできない環境のみ、下の「操作切替」ボタンでタッチの動作を「開く / 旗」に切り替えられます。
         </p>
         <div class="button-row">
             <form method="post">
@@ -41,9 +40,9 @@ $remainingMines = max(0, $mines - $flags);
         <?php if ($game_over): ?>
             <div class="status <?php echo $win ? 'status-success' : 'status-fail'; ?>">
                 <?php if ($win): ?>
-                    🎉 クリア！ 全ての安全なマスを開くことができました。
+                    \クリア！/ 全ての安全なマスを開くことができました。
                 <?php else: ?>
-                    💥 地雷を踏んでしまいました…。リセットして再チャレンジ！
+                    X... 地雷を踏んでしまいました…。リセットして再チャレンジ！
                 <?php endif; ?>
             </div>
         <?php else: ?>
@@ -66,7 +65,7 @@ $remainingMines = max(0, $mines - $flags);
             <div class="panel-header">
                 <div class="panel-title">Board</div>
                 <div class="pill pill-outline">
-                    <?php echo $rows . ' × ' . $cols . ' / 💣 ' . $mines; ?>
+                    <?php echo $rows . ' × ' . $cols . ' / X ' . $mines; ?>
                 </div>
             </div>
 
@@ -90,7 +89,7 @@ $remainingMines = max(0, $mines - $flags);
                                     <?php if ($cell['open']): ?>
                                         <?php if ($cell['mine']): ?>
                                             <div class="cell-open">
-                                                <span class="mine">💣</span>
+                                                 <span class="mine">X</span>
                                             </div>
                                         <?php else: ?>
                                             <?php if ($cell['adjacent'] > 0):
@@ -110,7 +109,9 @@ $remainingMines = max(0, $mines - $flags);
                                             data-row="<?php echo $r; ?>"
                                             data-col="<?php echo $c; ?>"
                                         >
-                                            <?php echo $cell['flag'] ? '⚑' : ''; ?>
+                                            <?php if ($cell['flag']): ?>
+                                                <span class="flag">F</span>
+                                            <?php endif; ?>
                                         </button>
                                     <?php endif; ?>
                                 </td>

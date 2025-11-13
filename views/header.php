@@ -1,5 +1,8 @@
 <div class="header">
-    <div class="logo-circle">💣</div>
+    <div class="logo">
+        <span class="logo-circle">
+        <span class="bomb-icon"></span>
+    </div>
     <div class="header-text">
         <div class="title">
             PHP Minesweeper
