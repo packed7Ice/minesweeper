@@ -1,6 +1,7 @@
 # minesweeper
 
 ## 1. 盤面初期化処理（game_logic.php）
+
 ```mermaid
 flowchart TD;
     A[開始] --> B[盤サイズ・地雷数の取得];
@@ -152,4 +153,55 @@ stateDiagram-v2
 
     PC --> Detect : 再描画
     Mobile --> Detect : 再描画
+```
+
+## 8. 難易度設定〜ゲーム開始フロー（config → game）
+
+```mermaid
+flowchart TD;
+    A[設定画面の表示] --> B[入力項目を確認<br/>（行数・列数・地雷数）];
+    B --> C{入力値に問題はないか？};
+    C -->|NO| D[エラーメッセージ表示<br/>設定画面に留まる];
+    C -->|YES| E[設定値を $_SESSION に保存];
+
+    E --> F[game_logic.php の初期化関数を呼び出し];
+    F --> G[盤面生成・地雷配置・隣接数計算];
+    G --> H["$_SESSION['board'] などに保存"];
+    H --> I[画面遷移: screen=game に切り替え];
+    I --> J[ゲーム画面を表示];
+```
+
+## 9. リセット / 再スタート処理フロー
+
+```mermaid
+flowchart TD;
+    A[ゲーム画面] --> B[Reset ボタン押下];
+    B --> C[controller.php で action=reset を受け取る];
+
+    C --> D["現在の $_SESSION['board'] 等を破棄 or 上書き"];
+    D --> E[game_logic.php の初期化関数を再度呼び出し];
+    E --> F[新しい盤面生成・地雷配置・隣接数計算];
+    F --> G[$_SESSION に新しい状態を書き込む];
+
+    G --> H[screen=game のまま再描画];
+    H --> I[新しいゲームとしてプレイ開始];
+```
+
+## 10. セッション状態管理フロー（初回アクセス / 継続プレイ）
+
+```mermaid
+flowchart TD;
+    A[ブラウザが index.php にアクセス] --> B["session_start() 実行"];
+    B --> C{$_SESSION に盤面データがあるか？};
+
+    C -->|NO| D[初回アクセスとみなす];
+    D --> E[デフォルト設定で初期盤面を生成];
+    E --> F["$_SESSION['board'] などに保存"];
+    F --> G[タイトル or 設定画面を表示];
+
+    C -->|YES| H[継続プレイとみなす];
+    H --> I{screen パラメータの値を確認};
+    I -->|title| J[タイトル画面を表示];
+    I -->|config| K[設定画面を表示];
+    I -->|game| L[既存盤面を用いてゲーム画面を表示];
 ```
