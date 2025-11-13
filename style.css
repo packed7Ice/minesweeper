@@ -82,12 +82,20 @@ body {
 }
 
 .title-sub {
-    font-size: 12px;
-    color: var(--text-muted);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-top: 2px;
+    display: inline-flex;          /* 横幅ちょうどに */
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;              /* 余白を少なめに */
+    border-radius: 9999px;         /* 丸いピル型 */
+    font-size: 11px;               /* 本文より小さめ */
+    line-height: 1.2;
+    background: rgba(15,23,42,0.8);
+    color: rgba(148,163,184,0.9);
+    border: 1px solid rgba(148,163,184,0.25);
+    max-width: 100%;
+    box-sizing: border-box;
 }
+
 
 .badge {
     font-size: 11px;
@@ -447,7 +455,7 @@ table.board {
     }
 
     .header {
-        gap: 10px;
+        gap: 8px;
         margin-bottom: 12px;
     }
 
@@ -462,7 +470,10 @@ table.board {
     }
 
     .title-sub {
-        font-size: 10px;
+        font-size: 10px;       /* さらに一段階小さく */
+        padding: 1px 6px;      /* 余白も縮める */
+        display: inline-flex;
+        width: auto;          /* 念のため明示しておく */
     }
 
     .section-title {
@@ -552,4 +563,17 @@ table.board {
     box-shadow: 
         0 0 6px rgba(249,115,22,0.8), /* オレンジの発光 */
         0 0 3px rgba(249,115,22,0.6);
+}
+
+/* Server-Side Edition 専用の見た目調整 */
+.title-sub--edition {
+    white-space: nowrap;   /* ★ 改行させない */
+}
+
+/* ついでにモバイルではさらに小さくする */
+@media (max-width: 768px) {
+    .title-sub--edition {
+        font-size: 9px;    /* 少し小さめ */
+        padding: 1px 6px;  /* 余白も少なめ */
+    }
 }

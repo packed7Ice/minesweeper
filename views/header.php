@@ -6,7 +6,9 @@
     <div class="header-text">
         <div class="title">
             PHP Minesweeper
-            <span class="badge">Server-Side Edition</span>
+            <div class="title-sub title-sub--edition">
+                Server-Side Edition
+            </div>
         </div>
         <div class="title-sub">Minimal · Session-Based</div>
     </div>
