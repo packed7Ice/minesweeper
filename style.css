@@ -8,7 +8,7 @@
     --border: #1f2937;
     --text-main: #e5e7eb;
     --text-muted: #9ca3af;
-    --cell-size: 30px;   /* ★ 追加：セルの基本サイズ */
+    --cell-size: 30px;   /* デフォルト値。JS が上書きします */
 }
 
 * {
@@ -302,13 +302,14 @@ body {
 /* ゲーム盤のスタイル */
 .board-wrapper {
     margin-top: 10px;
-    overflow-x: auto;
+    overflow-x: hidden;  /* 横スクロールは基本なしにする */
     padding-bottom: 4px;
 }
 
 table.board {
     border-collapse: collapse;
     margin: 0 auto;
+    max-width: 100%;
 }
 
 .board td {
@@ -352,7 +353,9 @@ table.board {
     justify-content: center;
 }
 
+/* ★ 空のマスだけ少し明るいグレーで塗る */
 .cell-open.empty {
+    background: #111827; /* ほんのり明るいダークグレー */
     color: rgba(148,163,184,0.35);
 }
 
@@ -409,7 +412,7 @@ table.board {
     height: 100%;
     border: none;
     cursor: pointer;
-    background: rgba(15,23,42,0.95);
+    background: #020617;          /* もっと暗く */
     color: var(--text-main);
     display: flex;
     align-items: center;
@@ -421,4 +424,34 @@ table.board {
 .cell-interactive:hover {
     background: rgba(30,64,175,0.95);
     transform: translateY(-0.5px);
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 12px;
+    }
+
+    .card {
+        border-radius: 16px;
+        padding: 16px 14px 20px;
+        box-shadow:
+            0 14px 28px rgba(15,23,42,0.8),
+            0 0 0 1px rgba(148,163,184,0.12);
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .section-desc,
+    .info-text {
+        font-size: 12px;
+    }
+
+    .primary-button,
+    .secondary-button,
+    .ghost-button {
+        font-size: 13px;
+        padding: 7px 14px;
+    }
 }

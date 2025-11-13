@@ -58,25 +58,6 @@ $remainingMines = max(0, $mines - $flags);
                 操作モード: 開く（左クリック） / 右クリック: 旗
             </button>
         </div>
-
-        <!-- ズーム（セルサイズ）調整 -->
-        <div class="panel" style="margin-top: 18px;">
-            <div class="panel-header">
-                <div class="panel-title">Zoom</div>
-                <div class="pill pill-outline" id="zoomValueLabel">セルサイズ: 30px</div>
-            </div>
-            <input
-                type="range"
-                id="cellSizeSlider"
-                class="zoom-slider"
-                min="18"
-                max="48"
-                value="30"
-            >
-            <p class="info-text" style="margin-top: 8px;">
-                セルサイズを変更すると、小さい画面でも盤面がカードの枠内に収まりやすくなります。
-            </p>
-        </div>
     </div>
 
     <!-- 右側：盤面 -->
@@ -97,7 +78,9 @@ $remainingMines = max(0, $mines - $flags);
             </form>
 
             <div class="board-wrapper">
-                <table class="board">
+                <table class="board"
+                       data-rows="<?php echo $rows; ?>"
+                       data-cols="<?php echo $cols; ?>">
                     <?php for ($r = 0; $r < $rows; $r++): ?>
                         <tr>
                             <?php for ($c = 0; $c < $cols; $c++):
