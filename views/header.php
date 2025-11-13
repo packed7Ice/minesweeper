@@ -5,6 +5,6 @@
             PHP Minesweeper
             <span class="badge">Server-Side Edition</span>
         </div>
-        <div class="title-sub">Minimal · Session-Based · No JavaScript</div>
+        <div class="title-sub">Minimal · Session-Based</div>
     </div>
 </div>

@@ -353,9 +353,9 @@ table.board {
     justify-content: center;
 }
 
-/* ★ 空のマスだけ少し明るいグレーで塗る */
+/* ★ 空のマス：数字なしが分かりやすいように、色を変える */
 .cell-open.empty {
-    background: #111827; /* ほんのり明るいダークグレー */
+    background: #111827; /* 少しだけ明るいダークグレー */
     color: rgba(148,163,184,0.35);
 }
 
@@ -407,12 +407,13 @@ table.board {
     width: 100%;
     accent-color: #38bdf8; /* 対応ブラウザならつまみの色だけ変わる */
 }
+
 .cell-interactive {
     width: 100%;
     height: 100%;
     border: none;
     cursor: pointer;
-    background: #020617;          /* もっと暗く */
+    background: #020617; /* 閉じているセルはかなり暗い */
     color: var(--text-main);
     display: flex;
     align-items: center;
