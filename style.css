@@ -456,3 +456,14 @@ table.board {
         padding: 7px 14px;
     }
 }
+/* デフォルトでは非表示 */
+.mobile-toggle {
+    display: none;
+}
+
+/* タッチデバイス、または幅が狭いときだけ表示 */
+@media (pointer: coarse), (max-width: 768px) {
+    .mobile-toggle {
+        display: inline-flex;
+    }
+}

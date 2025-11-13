@@ -139,14 +139,24 @@ window.addEventListener('load', () => {
             });
         });
 
-        // 操作モード切り替えボタン
-        if (modeToggleBtn && !modeToggleBtn.dataset.bound) {
-            modeToggleBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                clickMode = (clickMode === 'open') ? 'flag' : 'open';
-                updateModeLabel();
-            });
-            modeToggleBtn.dataset.bound = '1';
+        // ★ スマホ判定（タッチデバイスでなければボタンを隠す）
+        if (modeToggleBtn) {
+            const isTouchDevice =
+                ('ontouchstart' in window) ||
+                navigator.maxTouchPoints > 0 ||
+                navigator.msMaxTouchPoints > 0;
+
+            if (!isTouchDevice) {
+                // PC では完全に非表示（CSSだけだとキーボードフォーカスなどで見える場合もあるので念のため）
+                modeToggleBtn.style.display = 'none';
+            } else if (!modeToggleBtn.dataset.bound) {
+                modeToggleBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    clickMode = (clickMode === 'open') ? 'flag' : 'open';
+                    updateModeLabel();
+                });
+                modeToggleBtn.dataset.bound = '1';
+            }
         }
 
         updateModeLabel();

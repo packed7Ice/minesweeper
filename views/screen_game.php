@@ -54,7 +54,7 @@ $remainingMines = max(0, $mines - $flags);
 
         <!-- クリックモード切り替えボタン -->
         <div style="margin-top: 16px;">
-            <button id="clickModeToggle" class="secondary-button" type="button">
+            <button id="clickModeToggle" class="secondary-button mobile-toggle" type="button">
                 操作モード: 開く（左クリック） / 右クリック: 旗
             </button>
         </div>

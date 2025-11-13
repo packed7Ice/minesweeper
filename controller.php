@@ -52,7 +52,16 @@ if (isset($_POST['start_game'])) {
             break;
     }
 
-    initGame($rows, $cols, $mines);
+    // ★ ここがポイント
+    // すでにゲーム画面中（screen='game'）で、盤面も存在している場合は
+    // 「リロードによるフォーム再送信」とみなして盤面を作り直さない。
+    $alreadyGame = (isset($_SESSION['screen']) && $_SESSION['screen'] === 'game' && isset($_SESSION['board']));
+
+    if (!$alreadyGame) {
+        // 初回の「スタート」や、設定変更後の開始時だけ新規初期化
+        initGame($rows, $cols, $mines);
+    }
+
     $_SESSION['screen'] = 'game';
 }
 
