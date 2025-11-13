@@ -43,10 +43,11 @@ window.addEventListener('load', () => {
     function updateModeLabel() {
         const modeToggleBtn = document.getElementById('clickModeToggle');
         if (!modeToggleBtn) return;
+
         if (clickMode === 'open') {
-            modeToggleBtn.textContent = '操作モード: 開く（左クリック） / 右クリック: 旗';
+            modeToggleBtn.textContent = '操作切替: 開く';
         } else {
-            modeToggleBtn.textContent = '操作モード: 旗（左クリック） / 右クリック: 旗';
+            modeToggleBtn.textContent = '操作切替: 旗';
         }
     }
 
@@ -87,7 +88,8 @@ window.addEventListener('load', () => {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'X-Requested-With': 'fetch'
                 },
-                body: params.toString()
+                body: params.toString(),
+                cache: 'no-store'
             });
             if (!resp.ok) {
                 throw new Error('HTTP ' + resp.status);

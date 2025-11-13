@@ -427,35 +427,76 @@ table.board {
     transform: translateY(-0.5px);
 }
 
-@media (max-width: 640px) {
+/* スマホ・小さい画面向けの調整 */
+@media (max-width: 768px) {
     body {
-        padding: 12px;
+        padding: 8px;
+        font-size: 15px;
+    }
+
+    .app {
+        max-width: 100%;
     }
 
     .card {
         border-radius: 16px;
-        padding: 16px 14px 20px;
+        padding: 12px 10px 18px;
         box-shadow:
-            0 14px 28px rgba(15,23,42,0.8),
+            0 10px 20px rgba(15,23,42,0.8),
             0 0 0 1px rgba(148,163,184,0.12);
     }
 
-    .title {
+    .header {
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .logo-circle {
+        width: 40px;
+        height: 40px;
         font-size: 20px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .title-sub {
+        font-size: 10px;
+    }
+
+    .section-title {
+        font-size: 12px;
     }
 
     .section-desc,
     .info-text {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .primary-button,
     .secondary-button,
     .ghost-button {
         font-size: 13px;
-        padding: 7px 14px;
+        padding: 7px 13px;
+    }
+
+    /* レイアウトを縦一列にする（左→右の2カラムをやめる） */
+    .body-layout {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .panel {
+        padding: 12px 10px;
+    }
+
+    /* 盤面ラッパもできるだけ広くとる */
+    .board-wrapper {
+        margin-top: 8px;
     }
 }
+
 /* デフォルトでは非表示 */
 .mobile-toggle {
     display: none;
