@@ -25,8 +25,8 @@ window.addEventListener('load', () => {
         const sizeFromWidth = maxBoardWidth / cols;
         const sizeFromHeight = availableHeight / rows;
 
-        // 横幅と縦幅の制約を両立できる最小値を採用し、極端な値は丸める
-        let size = Math.floor(Math.min(sizeFromWidth, sizeFromHeight, 48));
+        // 横幅と縦幅の制約を両立できる最小値を採用しつつ、余裕があればやや大きめに確保
+        let size = Math.floor(Math.min(sizeFromWidth, sizeFromHeight, 54));
         size = Math.max(16, size);
 
         document.documentElement.style.setProperty('--cell-size', size + 'px');

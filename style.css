@@ -201,7 +201,7 @@ body {
 
     .board-panel {
         width: 100%;
-        max-width: 620px;
+        max-width: min(100%, 760px);
         margin-left: auto;
     }
 }
@@ -237,7 +237,7 @@ body {
 
     .layout-game .board-panel {
         padding: 36px 40px;
-        max-width: 760px;
+        max-width: min(100%, 920px);
     }
 }
 

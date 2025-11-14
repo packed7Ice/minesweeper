@@ -42,7 +42,7 @@ $remainingMines = max(0, $mines - $flags);
     <?php if ($game_over): ?>
         <div class="status <?php echo $win ? 'status-success' : 'status-fail'; ?>">
             <?php if ($win): ?>
-                \クリア！/ 全ての安全なマスを開くことができました。
+                クリア！ 全ての安全なマスを開くことができました。
             <?php else: ?>
                 X... 地雷を踏んでしまいました…。リセットして再チャレンジ！
             <?php endif; ?>
