@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start(); // 盤面状態を維持するため必ずセッションを開始
 
 require_once __DIR__ . '/game_logic.php';
@@ -61,10 +61,12 @@ if (isset($_POST['start_game'])) {
         initGame($rows, $cols, $mines);
     }
 
+    // 次の描画リクエストではゲーム画面を開く
     $_SESSION['screen'] = 'game';
 }
 
 // ---------- ゲーム中の入力処理 ----------
+// 盤面が存在する場合だけ操作リクエストを適用
 if ($_SESSION['screen'] === 'game' && !empty($_SESSION['board'])) {
     $board = &$_SESSION['board'];
     $rows  = $_SESSION['rows'];
@@ -83,6 +85,7 @@ if ($_SESSION['screen'] === 'game' && !empty($_SESSION['board'])) {
         $c = (int)$_POST['col'];
         $action = $_POST['action'];
 
+        // 盤面外の座標リクエストは無視する
         if ($r >= 0 && $r < $rows && $c >= 0 && $c < $cols) {
             if ($action === 'flag') {
                 // 未オープンのマスだけ旗のON/OFFを許可

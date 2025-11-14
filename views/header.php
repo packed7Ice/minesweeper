@@ -1,7 +1,8 @@
 <div class="header">
     <div class="logo">
         <span class="logo-circle">
-        <span class="bomb-icon"></span>
+            <span class="bomb-icon"></span>
+        </span>
     </div>
     <div class="header-text">
         <div class="title">

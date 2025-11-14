@@ -56,6 +56,7 @@ function initGame($rows, $cols, $mines)
         }
     }
 
+    // 初期化済みの情報をすべてセッションに残し、次リクエストから参照する
     $_SESSION['board'] = $board;
     $_SESSION['rows'] = $rows;
     $_SESSION['cols'] = $cols;
@@ -71,10 +72,12 @@ function openCell($r, $c)
     $cols = $_SESSION['cols'];
     $board = &$_SESSION['board'];
 
+    // 盤面外の座標は無視
     if ($r < 0 || $r >= $rows || $c < 0 || $c >= $cols) return;
 
     $cell = &$board[$r][$c];
 
+    // 既に開いたor旗があるセルも処理不要
     if ($cell['open'] || $cell['flag']) return;
 
     $cell['open'] = true;

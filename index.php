@@ -32,7 +32,7 @@ if ($isAjax) {
     <title>PHP Minesweeper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-        <!-- jsを読み込む -->
+    <!-- jsを読み込む -->
     <script src="app.js" defer></script>
 </head>
 <body>
