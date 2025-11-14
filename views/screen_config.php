@@ -1,4 +1,3 @@
-<div class="body-layout layout-config">
     <div>
         <div class="section-title">Setup</div>
         <p class="section-desc">
@@ -73,4 +72,3 @@
             </div>
         </form>
     </div>
-</div>

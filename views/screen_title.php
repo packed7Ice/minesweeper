@@ -1,4 +1,3 @@
-<div class="body-layout layout-title">
     <div>
         <div class="section-title">Welcome</div>
         <p class="section-desc">
@@ -35,4 +34,3 @@
             </p>
         </div>
     </div>
-</div>

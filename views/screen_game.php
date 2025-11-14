@@ -15,14 +15,14 @@ foreach ($board as $row) {
 }
 $remainingMines = max(0, $mines - $flags);
 ?>
-<div class="body-layout layout-game">
     <!-- 左側：説明・ボタン・ステータス -->
     <div class="game-info">
         <div class="section-title">Play</div>
         <p class="section-desc">
             左クリックでマスを開きます。<br>
             右クリックでフラグの設置・解除ができます。<br>
-            タッチデバイスなどクリックできない環境のみ、下の「操作切替」ボタンでタッチの動作を「開く / 旗」に切り替えられます。
+            タッチデバイスなどクリックできない環境のみ、<br>
+            下の「操作切替」ボタンでタッチの動作を「開く / 旗」に切り替えられます。
         </p>
         <div class="button-row">
             <form method="post">
@@ -122,4 +122,3 @@ $remainingMines = max(0, $mines - $flags);
             </div>
         </div>
     </div>
-</div>
