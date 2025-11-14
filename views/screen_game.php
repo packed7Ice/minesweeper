@@ -15,9 +15,9 @@ foreach ($board as $row) {
 }
 $remainingMines = max(0, $mines - $flags);
 ?>
-<div class="body-layout">
+<div class="body-layout layout-game">
     <!-- 左側：説明・ボタン・ステータス -->
-    <div>
+    <div class="game-info">
         <div class="section-title">Play</div>
         <p class="section-desc">
             左クリックでマスを開きます。<br>
@@ -60,8 +60,8 @@ $remainingMines = max(0, $mines - $flags);
     </div>
 
     <!-- 右側：盤面 -->
-    <div>
-        <div class="panel">
+    <div class="game-board">
+        <div class="panel board-panel">
             <div class="panel-header">
                 <div class="panel-title">Board</div>
                 <div class="pill pill-outline">

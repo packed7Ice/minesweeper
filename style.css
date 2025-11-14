@@ -32,6 +32,13 @@ body {
     max-width: 960px;
 }
 
+@media (min-width: 1024px) {
+    .app {
+        max-width: clamp(960px, 80vw, 1400px);
+        min-height: clamp(620px, 70vh, 840px);
+    }
+}
+
 .card {
     background: linear-gradient(145deg, #020617 0%, #020617 45%, #0b1120 100%);
     border-radius: 24px;
@@ -102,10 +109,126 @@ body {
     gap: 20px;
 }
 
+.panel-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.config-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.config-content {
+    width: 100%;
+}
+
+.config-difficulty,
+.config-custom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.config-custom .button-row {
+    justify-content: flex-start;
+}
+
+.game-info,
+.game-board {
+    width: 100%;
+}
+
 @media (min-width: 900px) {
     .body-layout {
         grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
         align-items: start;
+    }
+
+    .layout-title {
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 24px;
+    }
+
+    .layout-config {
+        grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    }
+
+    .layout-game {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        --cell-size: clamp(30px, 1.8vw, 36px);
+    }
+
+    .config-content {
+        align-items: start;
+    }
+
+    .radio-row--split {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .radio-row--split .radio-chip,
+    .radio-row--split .radio-label {
+        width: 100%;
+    }
+
+    .radio-row--split .radio-label {
+        justify-content: center;
+    }
+
+    .layout-config .config-panel {
+        width: min(100%, 720px);
+        margin-left: auto;
+    }
+
+    .game-board {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .board-panel {
+        width: 100%;
+        max-width: 620px;
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .layout-title .panel-stack--title {
+        grid-column: 1 / -1;
+    }
+
+    .layout-config {
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 32px;
+    }
+
+    .layout-config > div:last-child {
+        justify-self: stretch;
+    }
+
+    .layout-config .config-panel {
+        padding: 36px 40px;
+    }
+
+    .layout-game {
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        column-gap: 42px;
+        --cell-size: clamp(32px, 2.35vw, 46px);
+    }
+
+    .layout-game .game-board {
+        padding-left: 32px;
+    }
+
+    .layout-game .board-panel {
+        padding: 36px 40px;
+        max-width: 760px;
     }
 }
 
@@ -264,6 +387,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+}
+
+.radio-row--split {
+    width: 100%;
 }
 
 .radio-chip {

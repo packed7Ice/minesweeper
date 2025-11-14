@@ -1,4 +1,4 @@
-<div class="body-layout">
+<div class="body-layout layout-title">
     <div>
         <div class="section-title">Welcome</div>
         <p class="section-desc">
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="panel-stack panel-stack--title">
         <div class="panel">
             <div class="panel-header">
                 <div class="panel-title">How it works</div>
